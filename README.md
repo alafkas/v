@@ -1,5 +1,5 @@
 # v
-A very very simple server side rendering view library
+A very very simple view library
 
 Example
 
