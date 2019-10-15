@@ -1,5 +1,5 @@
 # v.js
-A very very simple server side rendering library 
+A very very simple server side rendering library with jQuery and Ajax
 
 Example
 
