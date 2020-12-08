@@ -1,5 +1,5 @@
 # v
-A very very simple view library.  
+A very simple view library.  
 Ideal for server-side rendered MVC frameworks.  
 
 Example
