@@ -1,6 +1,6 @@
 # v
 A very simple view library.  
-Ideal for server-side rendered MVC frameworks.  
+Ideal for server-side rendering MVC frameworks.
 
 Example
 ```javascript
