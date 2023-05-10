@@ -31,20 +31,25 @@ Element.prototype.refresh = function() {
   var element = this;
   var url = element.getAttribute('data-url');
 
-  request(url).then((response) => {
+  _request(url).then((response) => {
     element.innerHTML = response;
+    _refreshAll(element);
   }).catch((error) => {
     element.innerHTML = error;
   })
 };
 
 function refreshAll() {
-  const elements = document.querySelectorAll(`*[data-url]`);
+  _refreshAll(document.body);
+};
+
+function _refreshAll(element) {
+  const elements = element.querySelectorAll(':scope [data-url]');
   
   const promises = [];
   for (var i = 0; i < elements.length; i++) {
     var url = elements[i].getAttribute('data-url');
-    promises.push(request(url));
+    promises.push(_request(url));
   }
   
   Promise.allSettled(promises).then((results) => {
@@ -52,15 +57,16 @@ function refreshAll() {
       var result = results[i];
       if (result.status === "fulfilled") {
         elements[i].innerHTML = result.value;
+        _refreshAll(elements[i]);
       }
       else {
         elements[i].innerHTML = result.reason;
       }
     }
   });
-}
+};
 
-function request(url) {
+function _request(url) {
   return new Promise(function (resolve, reject) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
@@ -75,4 +81,4 @@ function request(url) {
     request.open("GET", url, true);
     request.send();
   });
-}
+};
