@@ -13,7 +13,7 @@ Example 1 (html)
   </head>
   <body>
     <!-- a native american -->
-    <div data-url="/native-american"></div>
+    <div data-url="/indian"></div>
     
     <!-- a horse -->
     <div data-url="/horse"></div>
