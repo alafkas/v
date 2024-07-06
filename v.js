@@ -78,6 +78,7 @@ function _request(url) {
         }
       }
     };
+    request.responseType = 'text';
     request.open("GET", url, true);
     request.send();
   });
