@@ -33,17 +33,17 @@ Element.prototype.refresh = function() {
 
   _request(url).then((response) => {
     element.innerHTML = response;
-    _refreshAll(element);
+    _refresh(element);
   }).catch((error) => {
     element.innerHTML = error;
   })
 };
 
 function refreshAll() {
-  _refreshAll(document.body);
+  _refresh(document.body);
 };
 
-function _refreshAll(element) {
+function _refresh(element) {
   const elements = element.querySelectorAll(':scope [data-url]');
   
   const promises = [];
@@ -57,7 +57,7 @@ function _refreshAll(element) {
       var result = results[i];
       if (result.status === "fulfilled") {
         elements[i].innerHTML = result.value;
-        _refreshAll(elements[i]);
+        _refresh(elements[i]);
       }
       else {
         elements[i].innerHTML = result.reason;
