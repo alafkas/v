@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2013-2024 Aris Lafkas
+Copyright (c) 2013-2025 Aris Lafkas
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,17 +33,17 @@ Element.prototype.refresh = function() {
 
   _request(url).then((response) => {
     element.innerHTML = response;
-    _refresh(element);
+    _refreshChildren(element);
   }).catch((error) => {
     element.innerHTML = error;
   })
 };
 
 function refreshAll() {
-  _refresh(document.body);
+  _refreshChildren(document.body);
 };
 
-function _refresh(element) {
+function _refreshChildren(element) {
   const elements = element.querySelectorAll(':scope [data-url]');
   
   const promises = [];
@@ -57,7 +57,7 @@ function _refresh(element) {
       var result = results[i];
       if (result.status === "fulfilled") {
         elements[i].innerHTML = result.value;
-        _refresh(elements[i]);
+        _refreshChildren(elements[i]);
       }
       else {
         elements[i].innerHTML = result.reason;
