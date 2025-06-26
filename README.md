@@ -29,7 +29,7 @@ Example 1 (html)
 ```
 Example 2 (javascript)
 ```javascript
-var div = document.createElement('div');
+const div = document.createElement('div');
 document.body.appendChild(div);
   
 div.v('/users/1');
