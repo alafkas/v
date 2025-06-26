@@ -23,13 +23,13 @@ SOFTWARE.
 */
 
 Element.prototype.v = function(url) {
-  var element = this;
+  const element = this;
   element.setAttribute('data-url', url);
 };
 
 Element.prototype.refresh = function() {
-  var element = this;
-  var url = element.getAttribute('data-url');
+  const element = this;
+  const url = element.getAttribute('data-url');
 
   _request(url).then((response) => {
     element.innerHTML = response;
@@ -47,14 +47,14 @@ function _refreshChildren(element) {
   const elements = element.querySelectorAll(':scope [data-url]');
   
   const promises = [];
-  for (var i = 0; i < elements.length; i++) {
-    var url = elements[i].getAttribute('data-url');
+  for (let i = 0; i < elements.length; i++) {
+    const url = elements[i].getAttribute('data-url');
     promises.push(_request(url));
   }
   
   Promise.allSettled(promises).then((results) => {
-    for(var i = 0; i < results.length; i++) {
-      var result = results[i];
+    for(let i = 0; i < results.length; i++) {
+      const result = results[i];
       if (result.status === "fulfilled") {
         elements[i].innerHTML = result.value;
         _refreshChildren(elements[i]);
@@ -68,7 +68,7 @@ function _refreshChildren(element) {
 
 function _request(url) {
   return new Promise(function (resolve, reject) {
-    var request = new XMLHttpRequest();
+    const request = new XMLHttpRequest();
     request.onreadystatechange = function() {
       if (this.readyState == XMLHttpRequest.DONE) {
         if (this.status == 200) {
