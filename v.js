@@ -24,14 +24,18 @@ SOFTWARE.
 
 Element.prototype.v = function(url) {
   const element = this;
-  element.setAttribute('data-url', url);
+  element.setAttribute('data-url', _forgeUrl(url).href);
 };
 
 Element.prototype.refresh = function() {
   const element = this;
-  const url = element.getAttribute('data-url');
+  
+  const url = _forgeUrl(element.getAttribute('data-url'));
+  
+  const params = _getParams(element);
+  url.search = params;
 
-  _request(url).then((response) => {
+  _request(_forgeUrl(url).href).then((response) => {
     element.innerHTML = response;
     _refreshChildren(element);
   }).catch((error) => {
@@ -43,13 +47,72 @@ function refreshAll() {
   _refreshChildren(document.body);
 };
 
+Element.prototype.getParam = function(name) {
+  const element = this;
+  const params = _getParams(element);
+  return params.get(name);
+}
+
+Element.prototype.setParam = function(name, value) {
+  const element = this;
+  const url = _forgeUrl(element.getAttribute('data-url'));
+  
+  url.searchParams.set(name, value);
+
+  element.v(url.href);
+}
+
+Element.prototype.deleteParam = function(name, value) {
+  const element = this;
+  const url = _forgeUrl(element.getAttribute('data-url'));
+  
+  url.searchParams.delete(name);
+  
+  element.v(url.href);
+}
+
+function _forgeUrl(url) {
+  return new URL(url, window.location);
+}
+
+function _getParams(element) {
+  const paramsList = _getParamsList(element, []);
+  paramsList.reverse();
+
+  const params = new URLSearchParams();
+  paramsList.forEach((param) => {
+    param.forEach((value, key) => {
+      params.set(key, value);
+    })
+  })
+
+  return params;
+}
+
+function _getParamsList(element, params) {
+  if (element == document.body) {
+    url = _forgeUrl(window.location);
+    params.push(url.searchParams);
+    return params;
+  }
+  else {
+    if (element.hasAttribute('data-url')) {
+      url = _forgeUrl(element.getAttribute('data-url'));
+      params.push(url.searchParams);
+    }
+    return _getParamsList(element.parentElement, params);
+  }
+}
+
 function _refreshChildren(element) {
   const elements = element.querySelectorAll(':scope [data-url]');
   
   const promises = [];
   for (let i = 0; i < elements.length; i++) {
-    const url = elements[i].getAttribute('data-url');
-    promises.push(_request(url));
+    const url = _forgeUrl(elements[i].getAttribute('data-url'));
+    const params = _getParams(elements[i]);
+    url.search = params;
+    promises.push(_request(url.href));
   }
   
   Promise.allSettled(promises).then((results) => {

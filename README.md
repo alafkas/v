@@ -1,7 +1,7 @@
 # v
 A minimalistic AJAX view engine.
 
-Click [here](https://alafkas.github.io/v/) for a live demo. 
+Click [here](https://alafkas.github.io/v/?greeting=hello+world) for a live demo. 
 
 Example 1 (html)
 ```html
@@ -14,7 +14,7 @@ Example 1 (html)
   </head>
   <body>
     <!-- a native american -->
-    <div data-url="/indian"></div>
+    <div data-url="/indian?name=Geronimo"></div>
     
     <!-- a horse -->
     <div data-url="/horse"></div>
@@ -33,6 +33,7 @@ Example 2 (javascript)
 const div = document.createElement('div');
 document.body.appendChild(div);
   
-div.v('/users/1');
+div.v('/users');
+div.setParam('userId', 1);
 div.refresh();
 ```
