@@ -86,7 +86,14 @@ function _getParams(element) {
     })
   })
 
-  return params;
+  // Reversing again to get the more specific param first
+  const paramsArray = [];
+  params.forEach((value, key) => {
+    paramsArray.push([key, value])
+  })
+  paramsArray.reverse();
+  
+  return new URLSearchParams(paramsArray);
 }
 
 function _getParamsList(element, params) {
