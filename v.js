@@ -76,38 +76,33 @@ function _forgeUrl(url) {
 }
 
 function _getParams(element) {
-  const paramsList = _getParamsList(element, []);
-  paramsList.reverse();
+  const urlSearchParams = new URLSearchParams();
 
-  const params = new URLSearchParams();
-  paramsList.forEach((param) => {
-    param.forEach((value, key) => {
-      params.set(key, value);
+  const searchParamsList = _getSearchParamsList(element, []);
+
+  searchParamsList.forEach((searchParams) => {
+    searchParams.forEach((value, key) => {
+      if (urlSearchParams.get(key) == null) {
+        urlSearchParams.set(key, value);
+      }
     })
   })
 
-  // Reversing again to get the more specific param first
-  const paramsArray = [];
-  params.forEach((value, key) => {
-    paramsArray.push([key, value])
-  })
-  paramsArray.reverse();
-  
-  return new URLSearchParams(paramsArray);
+  return urlSearchParams;
 }
 
-function _getParamsList(element, params) {
+function _getSearchParamsList(element, searchParamsList) {
   if (element == document.body) {
     url = _forgeUrl(window.location);
-    params.push(url.searchParams);
-    return params;
+    searchParamsList.push(url.searchParams);
+    return searchParamsList;
   }
   else {
     if (element.hasAttribute('data-url')) {
       url = _forgeUrl(element.getAttribute('data-url'));
-      params.push(url.searchParams);
+      searchParamsList.push(url.searchParams);
     }
-    return _getParamsList(element.parentElement, params);
+    return _getSearchParamsList(element.parentElement, searchParamsList);
   }
 }
 
