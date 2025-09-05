@@ -1,7 +1,7 @@
 # v
 A minimalistic AJAX view engine.
 
-Click [here](https://alafkas.github.io/v/?greeting=hello+world) for a live demo. 
+Click [here](https://alafkas.github.io/v/?greeting=hello) for a live demo. 
 
 Example 1 (html)
 ```html
