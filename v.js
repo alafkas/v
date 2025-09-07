@@ -109,26 +109,9 @@ function _getSearchParamsList(element, searchParamsList) {
 function _refreshChildren(element) {
   const elements = element.querySelectorAll(':scope [data-url]');
   
-  const promises = [];
   for (let i = 0; i < elements.length; i++) {
-    const url = _forgeUrl(elements[i].getAttribute('data-url'));
-    const params = _getParams(elements[i]);
-    url.search = params;
-    promises.push(_request(url.href));
+    elements[i].refresh();
   }
-  
-  Promise.allSettled(promises).then((results) => {
-    for(let i = 0; i < results.length; i++) {
-      const result = results[i];
-      if (result.status === "fulfilled") {
-        elements[i].innerHTML = result.value;
-        _refreshChildren(elements[i]);
-      }
-      else {
-        elements[i].innerHTML = result.reason;
-      }
-    }
-  });
 };
 
 function _request(url) {
