@@ -10,6 +10,7 @@ Example 1 (html)
   <head>
     <meta charset="UTF-8">
     <title>v</title>
+    <link rel="stylesheet" href="v.css" />
     <script type="text/javascript" src="v.js"></script>
   </head>
   <body>
@@ -23,7 +24,9 @@ Example 1 (html)
     <div data-url="/girl"></div>
 
     <script type="text/javascript">
-      refreshAll();
+      refreshAll(() => {
+        console.log('Page loaded!');
+      });
     </script>
   </body>
 </html>
@@ -35,5 +38,7 @@ document.body.appendChild(div);
   
 div.v('/users');
 div.setParam('userId', 1);
-div.refresh();
+div.refresh(() => {
+  console.log('User loaded!');
+});
 ```

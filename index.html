@@ -11,23 +11,9 @@
         margin: auto;
         padding: auto;
       }
-
-      [data-url] {
-        animation-name: fadeInOpacity;
-        animation-duration: 1s;
-        padding: 10px;
-      }
-
-      @keyframes fadeInOpacity {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
     </style>
 	  
+    <link rel="stylesheet" href="v.css" />
     <script type="text/javascript" src="v.js"></script>	  
   </head>
   <body>
@@ -41,7 +27,9 @@
     <div data-url="/girl"></div>
 
     <script type="text/javascript">
-      refreshAll();
+      refreshAll(() => {
+        console.log('Page loaded!');
+      });
     </script>
   </body>
 </html>
