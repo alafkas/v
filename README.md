@@ -3,7 +3,7 @@ A minimalistic AJAX view engine.
 
 Click [here](https://alafkas.github.io/v/?greeting=hello) for a live demo. 
 
-Example 1 (html)
+Example 1 (HTML)
 ```html
 <!DOCTYPE html>
 <html>
@@ -31,7 +31,7 @@ Example 1 (html)
   </body>
 </html>
 ```
-Example 2 (javascript)
+Example 2 (JavaScript)
 ```javascript
 const div = document.createElement('div');
 document.body.appendChild(div);
@@ -42,3 +42,6 @@ div.refresh(() => {
   console.log('User loaded!');
 });
 ```
+To play around locally with v you can download it, and do
+```python -m http.server```
+in the directory v lies in.
