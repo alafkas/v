@@ -42,6 +42,6 @@ div.refresh(() => {
   console.log('User loaded!');
 });
 ```
-To play around locally with v you can download it, and do
+To play around locally with v you can download it, and run
 ```python -m http.server```
 in the directory v lies in.
