@@ -31,7 +31,7 @@ HTMLElement.prototype.refresh = function(callback) {
   const element = this;
   _refresh(element).then(() => {
     setTimeout(() => {
-      _clearOpacityClasses();
+      _clearFadeInClasses();
     }, 1000);
 
     if (typeof callback === 'function') {
@@ -67,7 +67,7 @@ HTMLElement.prototype.deleteParam = function(name, value) {
 function refreshAll(callback) {
   _refreshChildren(document.body).then(() => {
     setTimeout(() => {
-      _clearOpacityClasses();
+      _clearFadeInClasses();
     }, 1000);
 
     if (typeof callback === 'function') {
@@ -142,7 +142,7 @@ function _getSearchParamsList(element, searchParamsList) {
   }
 }
 
-function _clearOpacityClasses() {
+function _clearFadeInClasses() {
   const elements = document.querySelectorAll('._fade-in');
   for (let i = 0; i < elements.length; i++) {
     elements[i].classList.remove('_fade-in');
