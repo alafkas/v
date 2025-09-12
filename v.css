@@ -1,6 +1,6 @@
 ._skeleton-loader {
   position: relative;
-  height: 180px;
+  height: 240px;
 }
 
 ._skeleton-loader:after {
@@ -22,17 +22,17 @@
     linear-gradient(#aaaaaa 16px, transparent 0),
     linear-gradient(#aaaaaa 16px, transparent 0),
     linear-gradient(#ffffff 100%, transparent 0);
-  background-size: 2560px 100%, 96px 96px, 128px 16px, 256px 16px, 5120px 16px, 5120px 16px, 5120px 16px, 5120px 16px, 5120px 16px, 100% 100%;
+  background-size: 3840px 100%, 96px 96px, 128px 16px, 256px 16px, 7680px 16px, 7680px 16px, 7680px 16px, 7680px 16px, 7680px 16px, 100% 100%;
   background-position: 0 0 , 16px 16px, 128px 40px, 128px 72px, 16px 128px, 16px 160px, 16px 192px, 16px 224px, 16px 256px, 0 0;
   animation: _skeleton-animation 2000ms infinite;
 }
-  
+
 @keyframes _skeleton-animation {
   to {
     background-position: 100% 0, 16px 16px, 128px 40px, 128px 72px, 16px 128px, 16px 160px, 16px 192px, 16px 224px, 16px 256px, 0 0;
   }
 }
-  
+
 ._fade-in {
   animation-name: _fadeInOpacity;
   animation-duration: 1s;
