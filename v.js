@@ -125,7 +125,17 @@ function _clearFadeInClasses() {
   }
 }
 
-function _request(url) {
+function _request(url, options) {
+  options = options || {};
+
+  const defaults = {
+    responseType: 'text'
+  };
+
+  for (const name in defaults) {
+    options[name] = options.hasOwnProperty(name) ? options[name] : defaults[name];
+  }
+
   return new Promise(function (resolve, reject) {
     const request = new XMLHttpRequest();
     request.onreadystatechange = function() {
@@ -137,7 +147,7 @@ function _request(url) {
         }
       }
     };
-    request.responseType = 'text';
+    request.responseType = options.responseType;
     request.open("GET", url, true);
     request.send();
   });
